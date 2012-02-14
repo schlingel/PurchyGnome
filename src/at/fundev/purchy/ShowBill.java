@@ -12,10 +12,13 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import at.fundev.purchy.async.AsyncWorkerLauncher;
+import at.fundev.purchy.async.IAsyncWorker;
 import at.fundev.purchy.models.Bill;
 import at.fundev.purchy.ui.ItemAdapter;
+import at.fundev.purchy.ui.Utils;
 
-public class ShowBill extends Activity implements OnClickListener {
+public class ShowBill extends Activity implements OnClickListener, IAsyncWorker {
 	public final static String BILL_KEY = "BILL_KEY";
 	
 	private TextView lblTotalSum;
@@ -30,11 +33,33 @@ public class ShowBill extends Activity implements OnClickListener {
 	
 	private Dialog dlgActions;
 	
+	private Bill curBill;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.show_bill);
 		initViews();
+		AsyncWorkerLauncher.from(this).execute();
+	}
+	
+	@Override
+	public void processAsync() {
+		unwrap();
+		itemAdapter = new ItemAdapter(this, R.layout.bill_list_item, curBill.getItems());
+	}
+	
+	private void unwrap() {
+		final Intent intent = getIntent();
+		final Bundle bundle = intent.getExtras();
+		curBill = (Bill)bundle.getSerializable(BILL_KEY);
+	}
+	
+	@Override
+	public void onAsyncFinish() {
+		lblTotalSum.setText(Utils.format(this, R.string.fmtStrPrice, (float)curBill.getTotalSumInCent() / 100f));
+		lblItemCount.setText(Utils.format(this, R.string.fmtStrItemsCount, curBill.getItems().size()));
+		lvItems.setAdapter(itemAdapter);
 	}
 	
 	private void initViews() {
@@ -45,7 +70,6 @@ public class ShowBill extends Activity implements OnClickListener {
 		lvItems = (ListView)findViewById(R.id.lvItems);
 		
 		final Builder builder = new Builder(this);
-		
 		builder.setItems(R.array.dlgBillActionOptions, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -54,11 +78,16 @@ public class ShowBill extends Activity implements OnClickListener {
 				}
 			}
 		});
+		builder.setTitle(R.string.lblActionDlg);		
+		dlgActions = builder.create();
 	}
 
 	@Override
 	public void onClick(View v) {
-		
+		// null check is a must because the user could click before the async init method has finished
+		if(v.equals(btnAction) && dlgActions != null) {
+			dlgActions.show();
+		}
 	}
 	
 	public static Intent asIntent(Context sender, Bill bill, Bundle bundle) {
@@ -67,4 +96,5 @@ public class ShowBill extends Activity implements OnClickListener {
 		intent.putExtras(bundle);
 		return intent;
 	}
+
 }

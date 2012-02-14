@@ -122,6 +122,12 @@ public class AddBill extends Activity implements OnClickListener {
 		item.setPriceInCent(price);
 		itemAdapter.addItemAt(item, 0);
 		itemAdapter.notifyDataSetChanged();
+		clearTextboxes();
+	}
+	
+	private void clearTextboxes() {
+		txtBxProductName.setText("");
+		txtBxProductPrice.setText("");
 	}
 	
 	private Long getPriceFromUI() {

@@ -25,4 +25,10 @@
     <string name="msgInvalidName">Please enter a name for the purchase!</string>
     
     <string name="msgCouldntAddBill">Couldn\'t add bill!</string>
+    
+    <string name="lblActionDlg">Actions</string>
+    
+    <string name="fmtStrPrice">%.2f €</string>
+    
+    <string name="fmtStrItemsCount">%d Items</string>
 </resources>

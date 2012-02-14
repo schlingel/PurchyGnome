@@ -42,4 +42,16 @@ public class Bill implements Serializable {
 	public List<PurchaseItem> getItems() {
 		return items;
 	}
+	
+	public long getTotalSumInCent() {
+		long sum = 0;
+		
+		if(items != null) {
+			for(int i = 0; i < items.size(); i++) {
+				sum += items.get(i).getPriceInCent();
+			}
+		}
+		
+		return sum;
+	}
 }

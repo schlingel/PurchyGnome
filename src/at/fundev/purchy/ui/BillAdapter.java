@@ -9,12 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Toast;
 import at.fundev.purchy.R;
 import at.fundev.purchy.models.Bill;
 import at.fundev.purchy.models.DatabaseHelper;
@@ -63,7 +60,7 @@ public class BillAdapter extends ArrayAdapter<Bill> {
 			}
 		});
 		
-		lblSumPrice.setText(String.format("%f €", (float)getSum(item) / 100));
+		lblSumPrice.setText(Utils.format(getContext(), R.string.fmtStrPrice, (float)getSum(item) / 100));
 		lblDate.setText(getItem(position).getDate().toLocaleString());
 		
 		return convertView;

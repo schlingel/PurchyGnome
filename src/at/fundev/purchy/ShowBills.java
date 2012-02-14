@@ -17,7 +17,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import at.fundev.purchy.models.Bill;
 import at.fundev.purchy.models.DatabaseHelper;
 import at.fundev.purchy.ui.BillAdapter;
-import at.fundev.purchy.ui.ItemAdapter;
 
 public class ShowBills extends Activity implements OnItemClickListener {
 	private static final String TAG = ShowBills.class.getSimpleName();

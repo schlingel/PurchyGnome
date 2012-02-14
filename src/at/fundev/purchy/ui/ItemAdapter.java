@@ -40,7 +40,7 @@ public class ItemAdapter extends ArrayAdapter<PurchaseItem> {
 	}
 	
 	private String getPriceTag(final PurchaseItem item) {
-		return String.format("%f €", (float)item.getPriceInCent() / 100f);
+		return Utils.format(getContext(), R.string.fmtStrPrice, (float)item.getPriceInCent() / 100f);
 	}
 	
 	@Override

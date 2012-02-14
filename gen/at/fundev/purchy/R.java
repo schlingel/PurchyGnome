@@ -56,6 +56,9 @@ public final class R {
         public static final int btnDelete=0x7f060009;
         public static final int btnOK=0x7f060001;
         public static final int btnShowBills=0x7f060004;
+        public static final int fmtStrItemsCount=0x7f06000f;
+        public static final int fmtStrPrice=0x7f06000e;
+        public static final int lblActionDlg=0x7f06000d;
         public static final int lblProductName=0x7f060005;
         public static final int lblProductPrice=0x7f060006;
         public static final int msgCouldntAddBill=0x7f06000c;
