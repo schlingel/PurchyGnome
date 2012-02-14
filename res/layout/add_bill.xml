@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+	<LinearLayout
+	    android:id="@+id/llInputBox"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical">
+	    <EditText
+	        android:id="@+id/txtBxProductName"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:hint="@string/lblProductName" />
+	    <EditText
+	        android:id="@+id/txtBxProductPrice"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:hint="@string/lblProductPrice"
+	        android:inputType="number" />
+	    <Button
+	        android:id="@+id/btnAddItem"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:text="@string/btnAddItem" />
+	</LinearLayout>
+	<ListView 
+	    android:id="@+id/lvItems"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:layout_below="@id/llInputBox"
+	    android:paddingBottom="@dimen/buttonBarHeight" />
+	<LinearLayout
+	    android:layout_width="fill_parent"
+	    android:layout_height="@dimen/buttonBarHeight"
+	    android:layout_alignParentBottom="true">
+	    <Button
+	        android:id="@+id/btnOK"
+	        android:layout_width="wrap_content"
+	        android:layout_height="fill_parent"
+	        android:layout_weight="0.5"
+	        android:text="@string/btnOK" />
+	    <Button
+	        android:id="@+id/btnCancel"
+	        android:layout_width="wrap_content"
+	        android:layout_height="fill_parent"
+	        android:layout_weight="0.5"
+	        android:text="@string/btnCancel" />
+	</LinearLayout>
+</RelativeLayout>

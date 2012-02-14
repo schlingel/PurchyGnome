@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">PurchyGnome</string>
+
+    <string name="btnOK">OK</string>
+    
+    <string name="btnCancel">Cancel</string>
+    
+    <string name="btnAddBill">Add new bill</string>
+    
+    <string name="btnShowBills">Show bills</string>
+    
+    <string name="lblProductName">Product</string>
+    
+    <string name="lblProductPrice">Price</string>
+    
+    <string name="btnAddItem">Add item</string>
+    
+    <string name="btnAction">Action</string>
+        
+    <string name="btnDelete">Delete</string>
+        
+    <string name="msgInvalidPrice">Please enter a positive number as price!</string>
+    
+    <string name="msgInvalidName">Please enter a name for the purchase!</string>
+    
+    <string name="msgCouldntAddBill">Couldn\'t add bill!</string>
+</resources>
