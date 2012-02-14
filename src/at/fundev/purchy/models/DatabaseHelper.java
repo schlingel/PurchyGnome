@@ -1,6 +1,7 @@
 package at.fundev.purchy.models;
 
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 import android.content.Context;
@@ -10,6 +11,7 @@ import android.util.Log;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
+import com.j256.ormlite.stmt.PreparedQuery;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 
@@ -71,11 +73,27 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 		for(int i = 0; i < bills.size(); i++) {
 			//bills.get(i).setItems(getPurchaseDao().query(getPurchaseDao().queryBuilder().where().eq(PurchaseItem.BILL_FIELD_NAME, bills.get(i).getId()).prepare()));
 			final int id = bills.get(i).getId();
-			final List<PurchaseItem> items = getPurchaseDao().query(getPurchaseDao().
-					queryBuilder().where().eq(PurchaseItem.BILL_FIELD_NAME, id).prepare());
-			
+			final List<PurchaseItem> items = getPurchaseItems(id);
 			Log.i("DBHELPER", String.format("Found %d items for bill id: %d", items.size(), id));			
 			bills.get(i).setItems(items);	
+		}
+		
+		return bills;
+	}
+	
+	public List<PurchaseItem> getPurchaseItems(int id) throws SQLException {
+		return getPurchaseDao().query(getPurchaseDao().
+				queryBuilder().where().eq(PurchaseItem.BILL_FIELD_NAME, id).prepare());
+	}
+	
+	public List<Bill> getBillsOfYear(final Date year) throws SQLException {
+		final Date lowerLimit = new Date(year.getYear() - 1, 12, 31);
+		final Date upperLimit = new Date(year.getYear() + 1, 1, 1);
+		final PreparedQuery<Bill> query = getBillDao().queryBuilder().where().between(Bill.DATE_FIELD, lowerLimit, upperLimit).prepare();
+		final List<Bill> bills = getBillDao().query(query);
+		
+		for(int i = 0; i < bills.size(); i++) {
+			bills.get(i).setItems(getPurchaseItems(bills.get(i).getId()));
 		}
 		
 		return bills;

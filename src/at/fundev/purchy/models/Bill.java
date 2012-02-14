@@ -10,11 +10,13 @@ import com.j256.ormlite.table.DatabaseTable;
 @DatabaseTable(tableName = "accounts")
 public class Bill implements Serializable {
 	private static final long serialVersionUID = 329948578083044737L;
+	
+	public static final String DATE_FIELD = "date";
 
 	@DatabaseField(generatedId = true)
 	private int id;
 	
-	@DatabaseField()
+	@DatabaseField(columnName = DATE_FIELD)
 	private Date date;
 	
 	private List<PurchaseItem> items;
