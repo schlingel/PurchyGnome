@@ -86,6 +86,10 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 				queryBuilder().where().eq(PurchaseItem.BILL_FIELD_NAME, id).prepare());
 	}
 	
+	public List<PurchaseItem> getAllPurchaseItems() throws SQLException {
+		return getPurchaseDao().query(getPurchaseDao().queryBuilder().groupBy(PurchaseItem.ITEM_NAME).prepare());
+	}
+	
 	public List<Bill> getBillsOfYear(final Date year) throws SQLException {
 		final Date lowerLimit = new Date(year.getYear() - 1, 12, 31);
 		final Date upperLimit = new Date(year.getYear() + 1, 1, 1);

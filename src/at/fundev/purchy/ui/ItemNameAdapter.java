@@ -30,15 +30,20 @@ public class ItemNameAdapter extends ArrayAdapter<PurchaseItem> {
 	}
 
 	private void filter() {
-		final ArrayList<PurchaseItem> filtered = new ArrayList<PurchaseItem>();
-		
-		for(int i = 0; i < allItems.size(); i++) {	
-			if(filter.toLowerCase().startsWith(allItems.get(i).getName().toLowerCase())) {
-				filtered.add(allItems.get(i));
+		if(filter.equals("")) {
+			filteredItems = allItems;
+		} else {
+			final ArrayList<PurchaseItem> filtered = new ArrayList<PurchaseItem>();
+			
+			for(int i = 0; i < allItems.size(); i++) {	
+				if(filter.toLowerCase().startsWith(allItems.get(i).getName().toLowerCase())) {
+					filtered.add(allItems.get(i));
+				}
 			}
+			
+			filteredItems = filtered;
 		}
 		
-		filteredItems = filtered;
 		notifyDataSetChanged();
 	}
 	
@@ -70,4 +75,12 @@ public class ItemNameAdapter extends ArrayAdapter<PurchaseItem> {
 	public void addItemAt(PurchaseItem item, int pos) {
 		filteredItems.add(pos, item);
 	}	
+	
+	/**
+	 * Adds all items and filters again with the already set filter.
+	 */
+	public void addAll(List<PurchaseItem> items) {
+		allItems = items;
+		filter();
+	}
 }

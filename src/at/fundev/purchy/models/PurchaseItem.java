@@ -11,10 +11,12 @@ public class PurchaseItem implements Serializable {
 
 	public static final String BILL_FIELD_NAME = "billId";
 	
+	public static final String ITEM_NAME = "name";
+	
 	@DatabaseField(generatedId = true)
 	private int id;
 	
-	@DatabaseField()
+	@DatabaseField(columnName = ITEM_NAME)
 	private String name;
 	
 	@DatabaseField()
